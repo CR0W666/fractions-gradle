@@ -22,26 +22,52 @@ public class Fraction implements IFraction {
 
     @Override
     public IFraction plus(IFraction other) {
-        throw new UnsupportedOperationException();
+        
+        int commonNum = (getNumerator() *  other.getDenominator()) + (other.getNumerator() * getDenominator());
+        int commonDen = getDenominator() * other.getDenominator();
+
+        return createNormalised(commonNum, commonDen);
+
     }
 
     @Override
     public IFraction minus(IFraction other) {
-        throw new UnsupportedOperationException();
+        
+        int commonNum = (getNumerator() *  other.getDenominator()) - (other.getNumerator() * getDenominator());
+        int commonDen = getDenominator() * other.getDenominator();
+
+        return createNormalised(commonNum, commonDen);
     }
 
     @Override
     public IFraction times(IFraction other) {
-        throw new UnsupportedOperationException();
+        
+        int commonNum = getNumerator() * other.getNumerator();
+        int commonDen = getDenominator() * other.getDenominator();
+
+        return createNormalised(commonNum, commonDen);
     }
 
     @Override
     public IFraction dividedBy(IFraction other) {
-        throw new UnsupportedOperationException();
+        
+        int commonNum = getNumerator() * other.getDenominator();
+        int commonDen = other.getNumerator() * getDenominator();
+
+        return createNormalised(commonNum, commonDen);
     }
 
     public static Fraction createNormalised(Integer numerator, Integer denominator) {
-        throw new UnsupportedOperationException();
+        var gcd = getGcd(numerator, denominator);
+
+        return new Fraction(numerator / gcd, denominator/ gcd);
+    }
+
+    public static int getEuclidGcd(int num1, int num2) {
+        if (num2 == 0) {
+            return num1;
+        }
+        return  getEuclidGcd(num2, num1 % num2);
     }
 
     @Override
